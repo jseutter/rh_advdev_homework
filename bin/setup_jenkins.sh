@@ -59,6 +59,9 @@ items:
 kind: List
 metadata: []" | oc create -f - -n ${GUID}-jenkins
 
+oc secrets new-basicauth nexus-secret --username=admin --password=redhat -n ${GUID}-jenkins
+oc set build-secret --source bc/tasks-pipeline nexus-secret -n ${GUID}-jenkins
+
 # Make sure that Jenkins is fully up and running before proceeding!
 while : ; do
   echo "Checking if Jenkins is Ready..."

@@ -41,7 +41,7 @@ podTemplate(
       // Do not run tests in this step
       stage('Build war') {
         echo "Building version ${devTag}"
-        sh "mvn -s ./openshift-tasks/nexus_openshift_settings.xml"
+        sh "mvn -s ./nexus_settings.xml"
         // TBD: Execute Maven Build
       }
 

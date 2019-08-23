@@ -43,7 +43,7 @@ podTemplate(
         echo "Building version ${devTag}"
         sh "ls -l .."
         sh "ls -l ."
-        sh "mvn -s ../nexus_settings.xml clean package -DskipTests=true"
+        sh "${mvnCmd} clean package -DskipTests=true"
         // TBD: Execute Maven Build
       }
 

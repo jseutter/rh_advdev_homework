@@ -41,8 +41,9 @@ podTemplate(
       // Do not run tests in this step
       stage('Build war') {
         echo "Building version ${devTag}"
-        sh "ls -l"
-        sh "mvn -s ./nexus_settings.xml"
+        sh "ls -l .."
+        sh "ls -l ."
+        sh "mvn -s ../nexus_settings.xml"
         // TBD: Execute Maven Build
       }
 

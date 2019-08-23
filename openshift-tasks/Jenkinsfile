@@ -98,8 +98,6 @@ podTemplate(
       stage('Deploy to Dev') {
         echo "Deploying container image to Development Project"
 
-      steps {
-        echo "Deploying container image to Development Project"
  
           // Update the Image on the Development Deployment Config
           openshift.withCluster() {
@@ -129,11 +127,7 @@ podTemplate(
                 rc = openshift.selector("rc", "tasks-${dc_version}").object()
               }
             }
-          }
-      }
-
-
-
+        }
         // TBD: Deploy to development Project
         //      Set Image, Set VERSION
         //      Make sure the application is running and ready before proceeding

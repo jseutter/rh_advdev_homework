@@ -82,6 +82,7 @@ podTemplate(
         script {
           openshift.withCluster() {
             openshift.withProject("${GUID}-tasks-dev") {
+              sh "ls -al ./target"
               echo "got here 10"
               openshift.selector("bc", "tasks").startBuild("--from-file=./target/openshift-tasks.war", "--wait=true")
               // OR use the file you just published into Nexus:

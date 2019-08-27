@@ -104,20 +104,24 @@ podTemplate(
               //openshift.set("image", "dc/tasks", "tasks=image-registry.openshift-image-registry.svc:5000/${devProject}/tasks:${devTag}")
     
               // For OpenShift 3 use this:
+              echo "got here 1"
               openshift.set("image", "dc/tasks", "tasks=docker-registry.default.svc:5000/${devProject}/tasks:${devTag}")
     
               // Update the Config Map which contains the users for the Tasks application
               // (just in case the properties files changed in the latest commit)
+              echo "got here 2"
               openshift.selector('configmap', 'tasks-config').delete()
               def configmap = openshift.create('configmap', 'tasks-config', '--from-file=./configuration/application-users.properties', '--from-file=./configuration/application-roles.properties' )
     
               // Deploy the development application.
+              echo "got here 3"
               openshift.selector("dc", "tasks").rollout().latest();
     
               // Wait for application to be deployed
               def dc = openshift.selector("dc", "tasks").object()
               def dc_version = dc.status.latestVersion
               def rc = openshift.selector("rc", "tasks-${dc_version}").object()
+              echo "got here 4"
     
               echo "Waiting for ReplicationController tasks-${dc_version} to be ready"
               while (rc.spec.replicas != rc.status.readyReplicas) {

@@ -86,10 +86,7 @@ podTemplate(
               sh "ls -al ./target"
               echo "got here 10"
               openshift.selector("bc", "tasks").startBuild("--from-file=./target/openshift-tasks.war", "--wait=true")
-              // OR use the file you just published into Nexus:
-              // "--from-file=http://nexus3.${prefix}-nexus.svc.cluster.local:8081/repository/releases/org/jboss/quickstarts/eap/tasks/${version}/tasks-${version}.war"
               echo "got here 11"
-
               openshift.tag("tasks:latest", "tasks:${devTag}")
               echo "got here 12"
             }

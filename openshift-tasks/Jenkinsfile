@@ -72,7 +72,7 @@ podTemplate(
         echo "got here 20"
         sh "curl http://nexus3-gpte-hw-cicd.apps.na311.openshift.opentlc.com/repository/maven-all-public/"
         echo "got here 21"
-        sh "${mvnCmd} deploy -DskipTests=true -DaltDeploymentRepository=nexus::default::http://nexus3-gpte-hw-cicd.apps.na311.openshift.opentlc.com/repository/maven-all-public/"
+        sh "${mvnCmd} deploy -X -DskipTests=true -DaltDeploymentRepository=nexus::default::http://nexus3-gpte-hw-cicd.apps.na311.openshift.opentlc.com/repository/maven-all-public/"
         echo "got here 22"
       }
 

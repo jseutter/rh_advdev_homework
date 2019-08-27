@@ -67,9 +67,13 @@ podTemplate(
       }
 
       // Publish the built war file to Nexus
-      stage('Publish to Nexus') {
-        echo "Publish to Nexus"
-//        sh "${mvnCmd} deploy -DskipTests=true -DaltDeploymentRepository=nexus::default::http://nexus3-gpte-hw-cicd.apps.na311.openshift.opentlc.com/repository/maven-all-public/"
+      stage('Publish war file to Nexus') {
+        echo "Publish war file to Nexus"
+        sh "got here 20"
+        sh "curl http://nexus3-gpte-hw-cicd.apps.na311.openshift.opentlc.com/repository/maven-all-public/"
+        sh "got here 21"
+        sh "${mvnCmd} deploy -DskipTests=true -DaltDeploymentRepository=nexus::default::http://nexus3-gpte-hw-cicd.apps.na311.openshift.opentlc.com/repository/maven-all-public/"
+        sh "got here 22"
       }
 
       // Build the OpenShift Image in OpenShift and tag it.

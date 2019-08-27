@@ -14,6 +14,7 @@ echo "Setting up Tasks Production Environment in project ${GUID}-tasks-prod"
 #oc policy add-role-to-user edit system:serviceaccount:${GUID}-jenkins:jenkins -n ${GUID}-tasks-prod
 oc adm policy add-role-to-user admin system:serviceaccount:gpte-jenkins:jenkins -n ${GUID}-tasks-prod
 oc adm policy add-role-to-user admin system:serviceaccount:${GUID}-jenkins:jenkins -n ${GUID}-tasks-prod
+oc adm policy add-role-to-user admin jseutter-crossvale.com -n ${GUID}-tasks-prod
 
 # Create Blue Application
 oc new-app ${GUID}-tasks-dev/tasks:0.0 --name=tasks-blue --allow-missing-imagestream-tags=true -n ${GUID}-tasks-prod
@@ -33,6 +34,7 @@ oc set env dc/tasks-blue VERSION='0.0 (tasks-blue)' -n ${GUID}-tasks-prod
 oc new-app ${GUID}-tasks-dev/tasks:0.0 --name=tasks-green --allow-missing-imagestream-tags=true -n ${GUID}-tasks-prod
 oc set triggers dc/tasks-green --remove-all -n ${GUID}-tasks-prod
 oc expose dc tasks-green --port 8080 -n ${GUID}-tasks-prod
+
 oc create configmap tasks-green-config --from-literal="application-users.properties=Placeholder" --from-literal="application-roles.properties=Placeholder" -n ${GUID}-tasks-prod
 oc set volume dc/tasks-green --add --name=jboss-config --mount-path=/opt/eap/standalone/configuration/application-users.properties --sub-path=application-users.properties --configmap-name=tasks-green-config -n ${GUID}-tasks-prod
 oc set volume dc/tasks-green --add --name=jboss-config1 --mount-path=/opt/eap/standalone/configuration/application-roles.properties --sub-path=application-roles.properties --configmap-name=tasks-green-config -n ${GUID}-tasks-prod

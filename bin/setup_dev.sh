@@ -15,6 +15,9 @@ echo "Setting up Tasks Development Environment in project ${GUID}-tasks-dev"
 oc adm policy add-role-to-user admin system:serviceaccount:gpte-jenkins:jenkins -n ${GUID}-tasks-dev
 # Give my personal Jenkins access to start builds..
 oc adm policy add-role-to-user admin system:serviceaccount:${GUID}-jenkins:jenkins -n ${GUID}-tasks-dev
+# Give my user access
+oc adm policy add-role-to-user admin jseutter-crossvale.com -n ${GUID}-tasks-dev
+
 
 # Set up Dev Application
 # oc new-build --binary=true --name="tasks" jboss-eap71-openshift:1.3 -n ${GUID}-tasks-dev

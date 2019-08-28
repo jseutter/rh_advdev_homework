@@ -151,9 +151,9 @@ podTemplate(
           // Tag the built image with the production tag.
           openshift.withCluster() {
             openshift.withProject("${devProject}") {
-              sh "got here 40"
+              echo "got here 40"
               openshift.tag("${devProject}/tasks:${devTag}", "${devProject}/tasks:${prodTag}")
-              sh "got here 41"
+              echo "got here 41"
             }
           }
         }

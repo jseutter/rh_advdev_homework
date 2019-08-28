@@ -153,6 +153,7 @@ podTemplate(
             openshift.withProject("${devProject}") {
               echo "got here 40"
               openshift.tag("${devProject}/tasks:${devTag}", "${devProject}/tasks:${prodTag}")
+              openshift.tag("${devProject}/tasks:${devTag}", "${prodProject}/tasks:${prodTag}")
               echo "got here 41"
             }
           }
@@ -186,7 +187,7 @@ podTemplate(
               // OpenShift 4
               //dc.spec.template.spec.containers[0].image="image-registry.openshift-image-registry.svc:5000/${devProject}/tasks:${prodTag}"
               // OpenShift 3
-              dc.spec.template.spec.containers[0].image="docker-registry.default.svc:5000/${devProject}/tasks:${prodTag}"
+              dc.spec.template.spec.containers[0].image="docker-registry.default.svc:5000/${prodProject}/tasks:${prodTag}"
     
               openshift.apply(dc)
     
